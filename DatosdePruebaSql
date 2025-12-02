@@ -1,0 +1,34 @@
+-- Usuarios
+INSERT INTO Usuario (nombre, email, contraseña, carrera, universidad) VALUES
+('Cristian Muño', 'cristi@example.com', '123456', 'DAM', 'IES Tecnología'),
+('Laura Pérez', 'laura@example.com', '123456', 'DAM', 'IES Tecnología');
+
+-- Tareas
+INSERT INTO Tarea (id_usuario, titulo, descripcion, fecha_limite, prioridad) VALUES
+(1, 'Estudiar SQL', 'Repasar joins y relaciones', '2025-12-05', 'Alta'),
+(2, 'Proyecto Figma', 'Diseñar prototipo navegable', '2025-12-07', 'Media');
+
+-- Hábitos
+INSERT INTO Habito (id_usuario, nombre, frecuencia, progreso) VALUES
+(1, 'Estudio diario', 'Diario', 50),
+(2, 'Leer libros', 'Semanal', 20);
+
+-- Eventos
+INSERT INTO Evento (id_usuario, titulo, descripcion, fecha, localizacion, max_participantes) VALUES
+(1, 'Reunión de estudio', 'Preparar examen final', '2025-12-03 18:00', 'Biblioteca IES', 5),
+(2, 'Tarde de cine', 'Ver película con amigos', '2025-12-04 20:00', 'Cine Centro', 10);
+
+-- Participaciones
+INSERT INTO Participacion (id_evento, id_usuario) VALUES
+(1,2),
+(2,1);
+
+-- Apuntes
+INSERT INTO Apunte (id_usuario, titulo, archivo, asignatura) VALUES
+(1, 'Apuntes SQL', 'apuntes_sql.pdf', 'Bases de Datos'),
+(2, 'Prototipo Figma', 'figma_prototipo.pdf', 'Desarrollo Web');
+
+-- Chats
+INSERT INTO Chat (id_usuario_origen, id_usuario_destino, mensaje, fecha) VALUES
+(1,2,'Hola, ¿vamos a estudiar juntos?','2025-12-01 15:00'),
+(2,1,'¡Sí! Nos vemos en la biblioteca.','2025-12-01 15:05');
