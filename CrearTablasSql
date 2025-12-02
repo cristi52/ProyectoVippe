@@ -1,0 +1,79 @@
+-- Crear base de datos
+CREATE DATABASE vippe;
+USE vippe;
+
+-- Tabla Usuario
+CREATE TABLE Usuario (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    contraseña VARCHAR(255) NOT NULL,
+    carrera VARCHAR(50),
+    universidad VARCHAR(100),
+    perfil_publico BOOLEAN DEFAULT TRUE,
+    avatar VARCHAR(255)
+);
+
+-- Tabla Tarea
+CREATE TABLE Tarea (
+    id_tarea INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    titulo VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    fecha_limite DATE,
+    prioridad ENUM('Baja','Media','Alta') DEFAULT 'Media',
+    completada BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Habito
+CREATE TABLE Habito (
+    id_habito INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    frecuencia VARCHAR(50),
+    progreso INT DEFAULT 0,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Evento
+CREATE TABLE Evento (
+    id_evento INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    titulo VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    fecha DATETIME,
+    localizacion VARCHAR(255),
+    max_participantes INT,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Participacion
+CREATE TABLE Participacion (
+    id_evento INT NOT NULL,
+    id_usuario INT NOT NULL,
+    PRIMARY KEY (id_evento, id_usuario),
+    FOREIGN KEY (id_evento) REFERENCES Evento(id_evento),
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Apunte
+CREATE TABLE Apunte (
+    id_apunte INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    titulo VARCHAR(100),
+    archivo VARCHAR(255),
+    asignatura VARCHAR(100),
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Tabla Chat
+CREATE TABLE Chat (
+    id_chat INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario_origen INT NOT NULL,
+    id_usuario_destino INT NOT NULL,
+    mensaje TEXT,
+    fecha DATETIME,
+    FOREIGN KEY (id_usuario_origen) REFERENCES Usuario(id_usuario),
+    FOREIGN KEY (id_usuario_destino) REFERENCES Usuario(id_usuario)
+);
